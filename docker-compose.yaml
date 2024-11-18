@@ -1,0 +1,20 @@
+services:
+  database:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123  # Cambia esta contraseña por una segura
+      MYSQL_DATABASE: users     # Nombre de la base de datos inicial
+      MYSQL_USER: docker        # Usuario inicial de MySQL
+      MYSQL_PASSWORD: 1234  
+
+
+  flask:
+    build: ./app
+    ports:
+      - 5000:5000
+    depends_on:
+      - database
